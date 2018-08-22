@@ -10,6 +10,6 @@ import (
 
 func main() {
 
-	models.RegisterDB()
+	models.Registdata()
 	beego.Run()
 }

@@ -3,7 +3,7 @@ package Commond_satl
 import (
 	"SuiFengSAP/Commond_satl/fileCp"
 
-	"Commond_satl/saltnode"
+	"SuiFengSAP/Commond_satl/saltnode"
 	"bufio"
 	"fmt"
 	"os"

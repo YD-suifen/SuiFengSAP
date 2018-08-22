@@ -2,6 +2,7 @@ package fileCp
 
 import (
 	"SuiFengSAP/Commond_satl/http"
+	"SuiFengSAP/Commond_satl/over"
 	"SuiFengSAP/Commond_satl/token"
 	"encoding/json"
 	"fmt"
@@ -20,13 +21,17 @@ func CPDir(Targethost []string, srcname string, targetpath string) bool {
 	if err != nil {
 		fmt.Println(err)
 	}
-	tocken := token.Token()
+	tocken, err := token.Token()
+	if err != nil {
+
+		fmt.Println(err)
+	}
 	err, respones := http.Httprequest("POST", http.Url, jsonreques, tocken)
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	var respone saltstack.ActionRepone
+	var respone over.ActionRepone
 	_ = json.Unmarshal(respones, &respone)
 
 	fmt.Println(respone.Return)
