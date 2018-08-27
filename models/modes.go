@@ -58,3 +58,52 @@ func Registdata() {
 		db.Set("gorm:table_options", "ENGINE=InnoDB").CreateTable(&User{})
 	}
 }
+
+func InsertInto(table interface{}) bool {
+
+	if err := db.Create(table).Error; err != nil {
+		fmt.Println(err)
+		return false
+	}
+	return true
+}
+
+func SelectUserDate() []User {
+
+	userlist := []User{}
+	db.Find(&userlist)
+	return userlist
+
+}
+
+func SelectHostDate() []Server {
+	hostlist := []Server{}
+	db.Find(&hostlist)
+	return hostlist
+}
+
+func LoginUserSelect(username string) bool {
+	user := User{}
+	if err := db.Where("Username = ?", username).Find(&user).Error; err != nil {
+		fmt.Println(err)
+		return false
+	}
+
+	return true
+}
+
+func DeleteUserDate(username string) bool {
+	if err := db.Where("Username", username).Delete(&User{}).Error; err != nil {
+		fmt.Println(err)
+		return false
+	}
+	return true
+}
+
+func DeleteHostDate(hostip string) bool {
+	if err := db.Where("Ip", hostip).Delete(&Server{}).Error; err != nil {
+		fmt.Println(err)
+		return false
+	}
+	return true
+}
